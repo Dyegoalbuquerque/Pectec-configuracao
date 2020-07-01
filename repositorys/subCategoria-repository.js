@@ -11,7 +11,7 @@ export class SubcategoriaRepository extends Repository {
     async obterSubcategorias(codigo) {
         let result = this.dao.obterTodos();
 
-        if (typeof codigo === 'string') {
+        if (codigo === '') {
             return result;
         }
 
