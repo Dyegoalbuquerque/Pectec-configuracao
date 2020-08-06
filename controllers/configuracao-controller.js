@@ -6,11 +6,16 @@ export class ConfiguracaoController {
       this.configuracaoService = container.get(ConfiguracaoService);
    }
 
-   tratarErro = async (e, res) => {
+   tratarErroHttpRest = async (e, res) => {
 
       console.error(e);
 
       return res.status(500).json('Ocorreu um problema no servidor');
+   };
+
+   tratarErroHttpGRPC = async (error, callback) => {
+      console.error(e);
+      callback(error);
    };
 
    obterSubcategorias = async (req, res) => {
@@ -22,7 +27,7 @@ export class ConfiguracaoController {
          return res.send(200, data);
 
       } catch (e) {
-         return this.tratarErro(e, res);
+         return this.tratarErroHttpRest(e, res);
       }
    }
 
@@ -33,7 +38,7 @@ export class ConfiguracaoController {
          return res.send(200, data);
 
       } catch (e) {
-         return this.tratarErro(e, res);
+         return this.tratarErroHttpRest(e, res);
       }
    }
 
@@ -43,7 +48,7 @@ export class ConfiguracaoController {
          return res.send(200, data);
 
       } catch (e) {
-         return this.tratarErro(e, res);
+         return this.tratarErroHttpRest(e, res);
       }
    }
 
@@ -55,7 +60,41 @@ export class ConfiguracaoController {
          return res.send(200, data);
 
       } catch (e) {
-         return this.tratarErro(e, res);
+         return this.tratarErroHttpRest(e, res);
+      }
+   }
+
+   obterPorCategoria = async  (call, callback)  => {
+
+      try {
+         let categoriaId = call.request.categoriaId;
+
+         let data = await this.configuracaoService.obterPorCategoria(categoriaId);
+         
+         callback(null, data);
+
+      } catch (e) {
+         this.tratarErroHttpGRPC({
+            code: grpc.status.INTERNAL_ERROR,
+            details: "Ocorreu um problema no servidor"
+         }, callback);
+      }
+   }
+
+   obterPorCodigoCategoria = async (call, callback)  => {
+
+      try {
+
+         let codigo = call.request.codigoCategoria;
+
+         let data = await this.configuracaoService.obterPorCategoria(codigo);
+         
+         callback(null, data);
+      } catch (e) {
+         this.tratarErroHttpGRPC({
+            code: grpc.status.INTERNAL_ERROR,
+            details: "Ocorreu um problema no servidor"
+         }, callback);
       }
    }
 }

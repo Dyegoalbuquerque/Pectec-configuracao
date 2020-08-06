@@ -1,8 +1,15 @@
 import Express from 'express';
 import bodyParser from 'body-parser';
 import routes from './index';
+import grpc from 'grpc';
+import { Container } from "typedi";
+import routers from './routers/router-grpc';
 
-export class App {
+export class Server {
+
+  constructor() {
+    this.routers = routers;
+  }
   
   app = Express();
 
@@ -11,24 +18,8 @@ export class App {
 
     this.app.listen(port, () => console.log(`web api running http://localhost:${port}`));
 
-    Date.prototype.getNameMonthPtBr = function getNameMonthPtBr(month) {
-
-      switch(month){
-        case 0: return "Janeiro";
-        case 1: return "Fevereiro";
-        case 2: return "Março";
-        case 3: return "Abril";
-        case 4: return "Maio";
-        case 5: return "Junho";
-        case 6: return "Julho";
-        case 7: return "Agosto";
-        case 8: return "Setembro";
-        case 9: return "Outubro";
-        case 10: return "Novembro";
-        case 11: return "Dezembro";
-      }
-      return "";
-    };
+    this.routers.bind('127.0.0.1:50051', grpc.ServerCredentials.createInsecure());
+    this.routers.start();
   }
 
   setupRoutes() {
@@ -48,6 +39,6 @@ export class App {
 
 let port = process.env.PORT || 5003;
 
-const app = new App();
+const server =  Container.get(Server);
 
-app.startup(port);
+server.startup(port);

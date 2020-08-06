@@ -27,4 +27,14 @@ export class ConfiguracaoService {
 
       return result;
    }
+
+   obterPorCategoria = async (categoriaId) => {
+      let result = await this.subcategoriaRepository.obterPorCategoria(categoriaId);
+      return result;
+   }
+
+   obterPorCodigoCategoria = async (codigo) => {
+      let result = await this.subcategoriaRepository.obterPorCodigoCategoria(codigo);
+      return result;
+   }
 }

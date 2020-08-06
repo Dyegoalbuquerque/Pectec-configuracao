@@ -1,5 +1,5 @@
 import express from 'express';
-import categoriaRoute from './router';
+import categoriaRoute from './routers/router-rest';
 import swaggerUi from 'swagger-ui-express';
 import swaggerDocument from './swagger.json';
 

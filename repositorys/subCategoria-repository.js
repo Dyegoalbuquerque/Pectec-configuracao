@@ -11,7 +11,7 @@ export class SubcategoriaRepository extends Repository {
     async obterSubcategorias(categorias) {
         let result = this.dao.obterTodos();
 
-        if (!categorias.lenght) {
+        if (!categorias.length) {
             return result;
         }
 
@@ -31,4 +31,12 @@ export class SubcategoriaRepository extends Repository {
 
         return result;
     }
+
+    async obterPorCodigoCategoria(codigo) {
+        let result = this.dao.obterTodos();
+  
+        result = result.filter(r => r.codigoCategoria == codigo);
+  
+        return result;
+     }
 }
