@@ -16,9 +16,9 @@ export class ConfiguracaoController {
    obterSubcategorias = async (req, res) => {
 
       try {
-         let codigoCategoria = req.query.codigoCategoria;
+         let categorias = req.query.categorias;
 
-         let data = await this.configuracaoService.obterSubcategorias(codigoCategoria);
+         let data = await this.configuracaoService.obterSubcategorias(categorias);
          return res.send(200, data);
 
       } catch (e) {

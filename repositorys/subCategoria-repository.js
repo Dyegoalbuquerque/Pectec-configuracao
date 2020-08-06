@@ -8,14 +8,14 @@ export class SubcategoriaRepository extends Repository {
         super(Subcategoria);
     }
 
-    async obterSubcategorias(codigo) {
+    async obterSubcategorias(categorias) {
         let result = this.dao.obterTodos();
 
-        if (codigo === '') {
+        if (!categorias.lenght) {
             return result;
         }
 
-        result = result.filter(r => r.codigoCategoria == codigo);
+        result = result.filter(r => categorias.includes(r.codigoCategoria));
 
         return result;
     }

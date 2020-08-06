@@ -10,8 +10,8 @@ export class ConfiguracaoService {
       this.subcategoriaRepository = new SubcategoriaRepository();
    }
 
-   obterSubcategorias = async (codigoCategoria) => {
-      let result = await this.subcategoriaRepository.obterSubcategorias(codigoCategoria);
+   obterSubcategorias = async (categorias) => {
+      let result = await this.subcategoriaRepository.obterSubcategorias(categorias);
 
       return result;
    }
