@@ -9,8 +9,10 @@ const configuracaoProto = grpc.load('./routers/configuracao.proto');
 
 /* gRPC http 2.0 */
 let controller = {
-    obterPorCategoria: configuracaoController.obterPorCategoria,
-    obterPorCodigoCategoria: configuracaoController.obterPorCodigoCategoria
+    obterSubcategoriasPorCategoria: configuracaoController.obterSubcategoriasPorCategoria,
+    obterSubcategoriasPorCodigoCategoria: configuracaoController.obterSubcategoriasPorCodigoCategoria,
+    obterTodasSubcategorias: configuracaoController.obterTodasSubcategorias,
+    obterSubcategoriaPorId: configuracaoController.obterSubcategoriaPorId
 }
 let routers = new grpc.Server();
 routers.addService(configuracaoProto.ConfiguracaoService.service, controller);

@@ -20,7 +20,7 @@ export class SubcategoriaRepository extends Repository {
         return result;
     }
 
-    async obterPorCategoria(categoriaId) {
+    obterPorCategoria = async (categoriaId) => {
         let result = this.dao.obterTodos();
 
         if (typeof categoriaId === 'string') {
@@ -32,11 +32,11 @@ export class SubcategoriaRepository extends Repository {
         return result;
     }
 
-    async obterPorCodigoCategoria(codigo) {
+    obterPorCodigoCategoria = async (codigo) => {
         let result = this.dao.obterTodos();
-  
+
         result = result.filter(r => r.codigoCategoria == codigo);
-  
+
         return result;
-     }
+    }
 }

@@ -18,7 +18,7 @@ export class Server {
 
     this.app.listen(port, () => console.log(`web api running http://localhost:${port}`));
 
-    this.routers.bind('127.0.0.1:50051', grpc.ServerCredentials.createInsecure());
+    this.routers.bind('127.0.0.1:50052', grpc.ServerCredentials.createInsecure());
     this.routers.start();
   }
 

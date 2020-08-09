@@ -64,7 +64,7 @@ export class ConfiguracaoController {
       }
    }
 
-   obterPorCategoria = async  (call, callback)  => {
+   obterSubcategoriasPorCategoria = async  (call, callback)  => {
 
       try {
          let categoriaId = call.request.categoriaId;
@@ -81,13 +81,44 @@ export class ConfiguracaoController {
       }
    }
 
-   obterPorCodigoCategoria = async (call, callback)  => {
+   obterSubcategoriasPorCodigoCategoria = async (call, callback)  => {
 
       try {
 
          let codigo = call.request.codigoCategoria;
 
-         let data = await this.configuracaoService.obterPorCategoria(codigo);
+         let data = await this.configuracaoService.obterPorCodigoCategoria(codigo);
+         
+         callback(null, data);
+      } catch (e) {
+         this.tratarErroHttpGRPC({
+            code: grpc.status.INTERNAL_ERROR,
+            details: "Ocorreu um problema no servidor"
+         }, callback);
+      }
+   }
+
+   obterTodasSubcategorias = async (call, callback)  => {
+
+      try {
+
+         let data = await this.configuracaoService.obterTodasSubcategorias();
+         
+         callback(null, data);
+      } catch (e) {
+         this.tratarErroHttpGRPC({
+            code: grpc.status.INTERNAL_ERROR,
+            details: "Ocorreu um problema no servidor"
+         }, callback);
+      }
+   }
+
+   obterSubcategoriaPorId = async (call, callback) => {
+
+      try {
+         let id = call.request.id;
+
+         let data = await this.configuracaoService.obterSubcategoriaPorId(id);
          
          callback(null, data);
       } catch (e) {

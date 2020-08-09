@@ -1,8 +1,10 @@
 syntax = "proto3";
 
 service ConfiguracaoService {
-    rpc obterPorCategoria(Empty) returns (SubcategoriaList) {}
-    rpc obterPorCodigoCategoria(Request) returns (SubcategoriaList) {}
+    rpc obterSubcategoriasPorCategoria(Subcategoria) returns (SubcategoriaList) {}
+    rpc obterSubcategoriasPorCodigoCategoria(Subcategoria) returns (SubcategoriaList) {}
+    rpc obterTodasSubcategorias(Empty) returns (SubcategoriaList) {}
+    rpc obterSubcategoriaPorId(Subcategoria) returns (Subcategoria) {}
 }
 
 message Empty {}
@@ -15,10 +17,6 @@ message Categoria {
 
 message CategoriaList {
    repeated Categoria categorias = 1;
-}
-
-message Request {
-   string codigoCategoria = 1;
 }
 
 message Subcategoria {
