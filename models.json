@@ -1,0 +1,24 @@
+[
+    {
+        "categoria": {
+            "id": "number",
+            "codigo": "string",
+            "descricao": "string"
+        }
+    },
+    {
+        "subcategoria": {
+            "id": "number",
+            "codigoCategoria": "string",
+            "descricao": "string",
+            "categoriaId":"number"
+        }
+    },
+    {
+        "unidadeMedida": {
+            "id": "number",
+            "codigo": "string",
+            "descricao": "string"
+        }
+    }
+]
