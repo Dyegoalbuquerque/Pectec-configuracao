@@ -3,6 +3,7 @@ import bodyParser from 'body-parser';
 import routes from './index';
 import grpc from 'grpc';
 import { Container } from "typedi";
+import dotenv from 'dotenv';
 import routers from './routers/router-grpc';
 
 export class Server {
@@ -14,6 +15,8 @@ export class Server {
   app = Express();
 
   startup(port) {
+    
+    dotenv.config()
     this.setupRoutes();
 
     this.app.listen(port, () => console.log(`web api running http://localhost:${port}`));
