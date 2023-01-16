@@ -13,7 +13,7 @@ export class SubcategoriaRepository extends Repository {
             return result;
         }
 
-        let query = { codigoCategoria: { $in: codigoCategorias } };
+        let query = { codigoCategoria: codigoCategorias };
 
         return await this.filtrar(query);
         
