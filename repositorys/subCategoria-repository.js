@@ -8,34 +8,30 @@ export class SubcategoriaRepository extends Repository {
     }
 
     async obterSubcategorias(codigoCategorias) {
-        let result = this.dao.obterTodos();
 
         if (!codigoCategorias.length) {
             return result;
         }
 
-        result = result.filter(r => codigoCategorias.includes(r.codigoCategoria));
+        let query = { codigoCategoria: { $in: codigoCategorias } };
 
-        return result;
+        return await this.filtrar(query);
+        
     }
 
     obterPorCategoria = async (categoriaId) => {
-        let result = this.dao.obterTodos();
-
         if (typeof categoriaId === 'string') {
             return result;
         }
+        
+        let query = { categoriaId: categoriaId};
 
-        result = result.filter(r => r.categoriaId == categoriaId);
-
-        return result;
+        return await this.filtrar(query);
     }
 
-    obterPorCodigoCategoria = async (codigo) => {
-        let result = this.dao.obterTodos();
+    obterPorCodigoCategoria = async (codigo) => {        
+        let query = { codigoCategoria: codigo};
 
-        result = result.filter(r => r.codigoCategoria == codigo);
-
-        return result;
+        return await this.filtrar(query);
     }
 }
