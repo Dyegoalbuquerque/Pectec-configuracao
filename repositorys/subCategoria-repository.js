@@ -1,10 +1,11 @@
 
 import { Repository } from './repository';
+import { SubCategoria } from '../models/subcategoria';
 
 export class SubcategoriaRepository extends Repository {
 
     constructor() {
-        super("subcategorias");
+        super("subcategorias", SubCategoria);
     }
 
     async obterSubcategorias(codigoCategorias) {
